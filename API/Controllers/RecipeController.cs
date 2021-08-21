@@ -26,7 +26,7 @@ namespace API.Controllers
         {
             try
             {
-                RecipeDTO recipe = _service.GetRecipeById(id);
+                RecipeDto recipe = _service.GetRecipeById(id);
                 return recipe is not null ? Ok(recipe) : NotFound();
             }
             catch (Exception e)
@@ -40,7 +40,7 @@ namespace API.Controllers
         public IActionResult GetAllRecipe()
         {
             try {
-                IEnumerable<RecipeDTO> recipes = _service.GetAllRecipes();
+                IEnumerable<RecipeDto> recipes = _service.GetAllRecipes();
                 return Ok(recipes);
             }
             catch (Exception e)
@@ -52,7 +52,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddRecipe([FromBody] RecipeDTO recipe)
+        public IActionResult AddRecipe([FromBody] RecipeDto recipe)
         {
             try
             {

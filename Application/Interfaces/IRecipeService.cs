@@ -5,8 +5,8 @@ namespace Application.Interfaces
 {
     public interface IRecipeService
     {
-        RecipeDTO GetRecipeById(int id);
-        IEnumerable<RecipeDTO> GetAllRecipes();
-        int? AddRecipe(RecipeDTO recipe);
+        RecipeDto GetRecipeById(int id);
+        IEnumerable<RecipeDto> GetAllRecipes();
+        int? AddRecipe(RecipeDto recipe);
     }
 }

@@ -17,7 +17,7 @@ namespace Application.Services
             _mapper = mapper;
         }
 
-        public int? AddRecipe(RecipeDTO recipe)
+        public int? AddRecipe(RecipeDto recipe)
         {
             Recipe newRecipe = _mapper.Map<Recipe>(recipe);
             newRecipe = _repository.Add(newRecipe);
@@ -25,21 +25,21 @@ namespace Application.Services
             return newRecipe.Id;
         }
 
-        public IEnumerable<RecipeDTO> GetAllRecipes()
+        public IEnumerable<RecipeDto> GetAllRecipes()
         {
             var items = _repository.GetAll();
-            IEnumerable<RecipeDTO> recipes = _mapper.Map<IEnumerable<RecipeDTO>>(items);
+            IEnumerable<RecipeDto> recipes = _mapper.Map<IEnumerable<RecipeDto>>(items);
             
             return recipes;
         }
 
-        public RecipeDTO GetRecipeById(int id)
+        public RecipeDto GetRecipeById(int id)
         {
             Recipe recipe = _repository.Get(id);
 
             if (recipe is null) return null;
             
-            return _mapper.Map<RecipeDTO>(recipe);
+            return _mapper.Map<RecipeDto>(recipe);
         }
     }
 }

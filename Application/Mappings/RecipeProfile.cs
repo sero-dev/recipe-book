@@ -8,7 +8,7 @@ namespace Application.Mappings
     {
         public RecipeProfile()
         {
-            CreateMap<Recipe, RecipeDTO>()
+            CreateMap<Recipe, RecipeDto>()
                 .ReverseMap();
         }
     }
