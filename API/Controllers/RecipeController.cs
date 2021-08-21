@@ -37,10 +37,18 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<RecipeDTO> GetAllRecipe()
+        public IActionResult GetAllRecipe()
         {
-            IEnumerable<RecipeDTO> recipes = _service.GetAllRecipes();
-            return recipes;
+            try {
+                IEnumerable<RecipeDTO> recipes = _service.GetAllRecipes();
+                return Ok(recipes);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return new StatusCodeResult(500);
+            }
+            
         }
 
         [HttpPost]
@@ -48,8 +56,8 @@ namespace API.Controllers
         {
             try
             {
-                RecipeDTO savedRecipe = _service.AddRecipe(recipe);
-                return Ok(recipe);
+                int? id = _service.AddRecipe(recipe);
+                return id is null ? new StatusCodeResult(500) : Created("", id);
             }
             catch (Exception e)
             {

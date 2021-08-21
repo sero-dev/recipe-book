@@ -7,6 +7,6 @@ namespace Application.Interfaces
     {
         RecipeDTO GetRecipeById(int id);
         IEnumerable<RecipeDTO> GetAllRecipes();
-        RecipeDTO AddRecipe(RecipeDTO recipe);
+        int? AddRecipe(RecipeDTO recipe);
     }
 }
