@@ -1,6 +1,7 @@
 using Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -33,6 +34,8 @@ namespace API
                 app.UseDeveloperExceptionPage();
             }
 
+            UpdateDatabase(app);
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -43,6 +46,19 @@ namespace API
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<RecipeBookContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }
