@@ -37,6 +37,21 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [Route("/search")]
+        public IActionResult GetRecipeByName(string name)
+        {
+            try
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                return new StatusCodeResult(500);
+            }
+        }
+
+        [HttpGet]
         public IActionResult GetAllRecipe()
         {
             try {
