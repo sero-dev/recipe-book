@@ -1,6 +1,7 @@
 ﻿using Application.Recipes.Commands;
 using Application.Recipes.Queries;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -19,6 +20,14 @@ namespace API.Controllers
         public async Task<IActionResult> GetAllRecipe()
         {
             var recipes = await Mediator.Send(new GetAllRecipesQuery());
+            return Ok(recipes);
+        }
+
+        [HttpGet]
+        [Route("search")]
+        public async Task<IActionResult> SearchByRecipeName([FromQuery] string name)
+        {
+            var recipes = await Mediator.Send(new SearchByRecipeNameQuery{Name = name});
             return Ok(recipes);
         }
 
