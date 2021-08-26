@@ -1,4 +1,4 @@
-﻿namespace Application.Models
+namespace Application.Recipes.Queries
 {
     public class RecipeDto
     {

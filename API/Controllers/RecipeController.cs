@@ -1,85 +1,32 @@
-﻿using Application.Interfaces;
-using Application.Models;
+﻿using Application.Recipes.Commands;
+using Application.Recipes.Queries;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class RecipeController : ControllerBase
+  public class RecipeController : BaseController
     {
-        private readonly ILogger<RecipeController> _logger;
-        private readonly IRecipeService _service;
-
-        public RecipeController(ILogger<RecipeController> logger, IRecipeService service)
-        {
-            _logger = logger;
-            _service = service;
-        }
-
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetRecipe(int id)
+        public async Task<IActionResult> GetRecipeById(int id)
         {
-            try
-            {
-                RecipeDto recipe = _service.GetRecipeById(id);
-                return recipe is not null ? Ok(recipe) : NotFound();
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e.Message);
-                return new StatusCodeResult(500);
-            }
+            var recipe = await Mediator.Send(new GetRecipeByIdQuery {Id = id});
+            return Ok(recipe);
         }
 
         [HttpGet]
-        [Route("/search")]
-        public IActionResult GetRecipeByName(string name)
+        public async Task<IActionResult> GetAllRecipe()
         {
-            try
-            {
-                return null;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e.Message);
-                return new StatusCodeResult(500);
-            }
-        }
-
-        [HttpGet]
-        public IActionResult GetAllRecipe()
-        {
-            try {
-                IEnumerable<RecipeDto> recipes = _service.GetAllRecipes();
-                return Ok(recipes);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e.Message);
-                return new StatusCodeResult(500);
-            }
-            
+            var recipes = await Mediator.Send(new GetAllRecipesQuery());
+            return Ok(recipes);
         }
 
         [HttpPost]
-        public IActionResult AddRecipe([FromBody] RecipeDto recipe)
+        public async Task<IActionResult> AddRecipe([FromBody] CreateRecipeCommand command)
         {
-            try
-            {
-                int? id = _service.AddRecipe(recipe);
-                return id is null ? new StatusCodeResult(500) : Created("", id);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e.Message);
-                return new StatusCodeResult(500);
-            }
-            
+            await Mediator.Send(command);
+            return NoContent();
         }
     }
 }
