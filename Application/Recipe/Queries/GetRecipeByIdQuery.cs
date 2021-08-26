@@ -21,7 +21,7 @@ namespace Application.Recipes.Queries {
 
             public async Task<RecipeDto> Handle(GetRecipeByIdQuery request, CancellationToken cancellationToken)
             {
-                var item = _repository.Get(request.Id);
+                var item = await _repository.GetAsync(request.Id);
                 var recipe = _mapper.Map<RecipeDto>(item);
                 return recipe;
             }

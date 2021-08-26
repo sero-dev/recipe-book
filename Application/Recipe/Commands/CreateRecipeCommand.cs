@@ -22,7 +22,7 @@ namespace Application.Recipes.Commands {
             public async Task<Unit> Handle(CreateRecipeCommand request, CancellationToken cancellationToken)
             {
                 var recipe = _mapper.Map<Recipe>(request);
-                _repository.Add(recipe);
+                await _repository.AddAsync(recipe);
 
                 return Unit.Value;
             }

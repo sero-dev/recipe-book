@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Persistence.Repositories
 {
@@ -16,27 +17,14 @@ namespace Persistence.Repositories
             Context = context;
         }
 
-        public T Add(T item)
-        {
-            T savedItem = Context.Set<T>().Add(item).Entity;
-            Context.SaveChanges();
-
-            return savedItem;
-        }
-
-        public void AddRange(IEnumerable<T> items)
-        {
-            Context.Set<T>().AddRange(items);
-        }
-
-        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
-        {
-            return Context.Set<T>().Where(predicate);
-        }
-
         public T Get(int id)
         {
             return Context.Set<T>().Find(id);
+        }
+
+        public async Task<T> GetAsync(int id)
+        {
+            return await Context.Set<T>().FindAsync(id);
         }
 
         public IEnumerable<T> GetAll()
@@ -44,24 +32,56 @@ namespace Persistence.Repositories
             return Context.Set<T>().ToList();
         }
 
-        public void Remove(T item)
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            Context.Set<T>().Remove(item);
+            return await Context.Set<T>().ToListAsync();
         }
 
-        public void RemoveRange(IEnumerable<T> items)
+        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {
-            Context.Set<T>().RemoveRange(items);
+            return Context.Set<T>().Where(predicate);
+        }
+
+        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await Context.Set<T>().Where(predicate).ToListAsync();
+        }
+
+        public void Add(T item)
+        {
+            T savedItem = Context.Set<T>().Add(item).Entity;
+            Context.SaveChanges();
+        }
+        
+        public async Task AddAsync(T item)
+        {
+            var trackedEntity = await Context.Set<T>().AddAsync(item);
+            Context.SaveChanges();
+        }
+
+        public void Remove(T item)
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(T item)
         {
-            Context.Set<T>().Update(item);
+            throw new NotImplementedException();
+        }
+
+        public void AddRange(IEnumerable<T> items)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRange(IEnumerable<T> items)
+        {
+            throw new NotImplementedException();
         }
 
         public void UpdateRange(IEnumerable<T> items)
         {
-            Context.Set<T>().UpdateRange(items);
+            throw new NotImplementedException();
         }
     }
 }
