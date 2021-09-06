@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-  public class RecipeController : BaseController
+    public class RecipeController : BaseController
     {
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRecipeById(int id)
@@ -22,11 +22,10 @@ namespace API.Controllers
             return Ok(recipes);
         }
 
-        [HttpGet]
-        [Route("search")]
+        [HttpGet("search")]
         public async Task<IActionResult> SearchByRecipeName([FromQuery] string name)
         {
-            var recipes = await Mediator.Send(new SearchByRecipeNameQuery{Name = name});
+            var recipes = await Mediator.Send(new SearchByRecipeNameQuery {Name = name});
             return Ok(recipes);
         }
 
@@ -34,7 +33,7 @@ namespace API.Controllers
         public async Task<IActionResult> AddRecipe([FromBody] CreateRecipeCommand command)
         {
             await Mediator.Send(command);
-            return NoContent();
+            return Created("", null);
         }
 
         [HttpDelete("{id}")]
