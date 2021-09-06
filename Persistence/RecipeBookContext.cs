@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
+using Persistence.Configurations;
 
 namespace Persistence
 {
@@ -12,8 +13,9 @@ namespace Persistence
             
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) {
-            modelBuilder.Entity<Recipe>().ToTable("Recipe");
-        } 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(RecipeConfiguration).Assembly);
+        }
     }
 }
