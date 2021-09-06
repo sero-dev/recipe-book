@@ -8,8 +8,7 @@ namespace API.Controllers
 {
   public class RecipeController : BaseController
     {
-        [HttpGet]
-        [Route("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetRecipeById(int id)
         {
             var recipe = await Mediator.Send(new GetRecipeByIdQuery {Id = id});
@@ -35,6 +34,12 @@ namespace API.Controllers
         public async Task<IActionResult> AddRecipe([FromBody] CreateRecipeCommand command)
         {
             await Mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteRecipeById(int id) {
+            await Mediator.Send(new DeleteRecipeCommand { Id = id});
             return NoContent();
         }
     }

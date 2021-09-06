@@ -1,0 +1,27 @@
+using System.Threading;
+using System.Threading.Tasks;
+using Application.Interfaces;
+using Domain.Entities;
+using MediatR;
+
+namespace Application.Recipes.Commands {
+    public class DeleteRecipeCommand : IRequest<Unit> {
+        public int Id { get; set; }
+
+        public class DeleteRecipeCommandHandler : IRequestHandler<DeleteRecipeCommand, Unit>
+        {
+            private IRecipeRepository _repository;
+            public DeleteRecipeCommandHandler(IRecipeRepository repository) {
+                _repository = repository;
+            }
+
+            public async Task<Unit> Handle(DeleteRecipeCommand request, CancellationToken cancellationToken)
+            {
+                Recipe recipe = await _repository.GetAsync(request.Id);
+                _repository.Remove(recipe.Id);
+
+                return Unit.Value;
+            }
+        }
+    }
+}

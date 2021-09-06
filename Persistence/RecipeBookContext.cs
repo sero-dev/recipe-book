@@ -7,11 +7,13 @@ namespace Persistence
     {
         public DbSet<Recipe> Recipes { get; set; }
 
-        public string DbPath { get; private set; }
-
         public RecipeBookContext(DbContextOptions options) : base(options)
         {
             
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<Recipe>().ToTable("Recipe");
+        } 
     }
 }

@@ -49,17 +49,17 @@ namespace Persistence.Repositories
 
         public void Add(T item)
         {
-            T savedItem = Context.Set<T>().Add(item).Entity;
+            Context.Set<T>().Add(item);
             Context.SaveChanges();
         }
         
         public async Task AddAsync(T item)
         {
-            var trackedEntity = await Context.Set<T>().AddAsync(item);
+            await Context.Set<T>().AddAsync(item);
             Context.SaveChanges();
         }
 
-        public void Remove(T item)
+        public void Remove(int id)
         {
             throw new NotImplementedException();
         }

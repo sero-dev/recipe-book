@@ -20,7 +20,7 @@ namespace Application.Interfaces
         Task AddAsync(T item);
 
         void Update(T item);
-        void Remove(T item);
+        void Remove(int id);
 
         void AddRange(IEnumerable<T> items);
         void UpdateRange(IEnumerable<T> item);
