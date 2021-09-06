@@ -14,7 +14,8 @@ namespace Application.Recipes.Queries {
             private readonly IRecipeRepository _repository;
             private readonly IMapper _mapper;
 
-            public SearchByRecipeNameQueryHandler(IRecipeRepository repository, IMapper mapper) {
+            public SearchByRecipeNameQueryHandler(IRecipeRepository repository, IMapper mapper) 
+            {
                 _repository = repository;
                 _mapper = mapper;
             }

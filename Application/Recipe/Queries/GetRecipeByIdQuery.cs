@@ -14,7 +14,8 @@ namespace Application.Recipes.Queries {
             private readonly IMapper _mapper;
 
 
-            public GetRecipeByIdHandler(IRecipeRepository repository, IMapper mapper) {
+            public GetRecipeByIdHandler(IRecipeRepository repository, IMapper mapper) 
+            {
                 _repository = repository;
                 _mapper = mapper;
             }

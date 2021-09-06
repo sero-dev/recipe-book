@@ -11,7 +11,8 @@ namespace Application.Recipes.Commands {
         public class DeleteRecipeCommandHandler : IRequestHandler<DeleteRecipeCommand, Unit>
         {
             private IRecipeRepository _repository;
-            public DeleteRecipeCommandHandler(IRecipeRepository repository) {
+            public DeleteRecipeCommandHandler(IRecipeRepository repository) 
+            {
                 _repository = repository;
             }
 

@@ -14,7 +14,8 @@ namespace Application.Recipes.Commands {
             private readonly IRecipeRepository _repository;
             private readonly IMapper _mapper;
 
-            public CreateRecipeCommandHandler(IRecipeRepository repository, IMapper mapper) {
+            public CreateRecipeCommandHandler(IRecipeRepository repository, IMapper mapper) 
+            {
                 _repository = repository;
                 _mapper = mapper;
             }
