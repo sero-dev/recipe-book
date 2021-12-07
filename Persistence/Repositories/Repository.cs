@@ -74,7 +74,14 @@ namespace Persistence.Repositories
 
         public void Update(T item)
         {
-            throw new NotImplementedException();
+            Context.Set<T>().Update(item);
+            Context.SaveChanges();
+        }
+
+        public async Task UpdateAsync(T item)
+        {
+            Context.Set<T>().Update(item);
+            await Context.SaveChangesAsync();
         }
 
         public void AddRange(IEnumerable<T> items)

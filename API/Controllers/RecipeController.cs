@@ -1,7 +1,6 @@
 ﻿using Application.Recipes.Commands;
 using Application.Recipes.Queries;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -34,6 +33,14 @@ namespace API.Controllers
         {
             await Mediator.Send(command);
             return Created("", null);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateRecipe(int id, [FromBody] UpdateRecipeCommand command) {
+            if (id != command.Id) return BadRequest();
+
+            await Mediator.Send(command);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

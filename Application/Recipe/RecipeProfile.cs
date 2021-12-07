@@ -11,6 +11,7 @@ namespace Application.Recipes
         {
             CreateMap<Recipe, RecipeDto>().ReverseMap();
             CreateMap<Recipe, CreateRecipeCommand>().ReverseMap();
+            CreateMap<Recipe, UpdateRecipeCommand>().ReverseMap();
         }
     }
 }

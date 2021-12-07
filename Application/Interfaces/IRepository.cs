@@ -20,6 +20,8 @@ namespace Application.Interfaces
         Task AddAsync(T item);
 
         void Update(T item);
+        Task UpdateAsync(T item);
+
         void Remove(int id);
         Task RemoveAsync(int id);
 
