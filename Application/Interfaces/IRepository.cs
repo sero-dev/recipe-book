@@ -21,6 +21,7 @@ namespace Application.Interfaces
 
         void Update(T item);
         void Remove(int id);
+        Task RemoveAsync(int id);
 
         void AddRange(IEnumerable<T> items);
         void UpdateRange(IEnumerable<T> item);

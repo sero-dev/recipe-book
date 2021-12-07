@@ -61,7 +61,15 @@ namespace Persistence.Repositories
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            var item = Get(id);
+            Context.Set<T>().Remove(item);
+            Context.SaveChangesAsync();
+        }
+
+        public async Task RemoveAsync(int id) {
+            var item = await GetAsync(id);
+            Context.Set<T>().Remove(item);
+            await Context.SaveChangesAsync();
         }
 
         public void Update(T item)
