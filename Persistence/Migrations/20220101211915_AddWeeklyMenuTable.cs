@@ -58,7 +58,6 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(table: "WeeklyMenu", columns: new[] { "Id", "Day" }, values: new object[] { 6, "Saturday" });
             migrationBuilder.InsertData(table: "WeeklyMenu", columns: new[] { "Id", "Day" }, values: new object[] { 7, "Sunday" });
 
-
             migrationBuilder.InsertData(table: "Recipe", columns: new[] { "Id", "Name" }, values: new object[] { 1, "Aloo Chaat" });
             migrationBuilder.InsertData(table: "Recipe", columns: new[] { "Id", "Name" }, values: new object[] { 2, "Biryani" });
             migrationBuilder.InsertData(table: "Recipe", columns: new[] { "Id", "Name" }, values: new object[] { 3, "Braided Salmon" });
