@@ -12,7 +12,10 @@ namespace Persistence
         {
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IWeeklyMenuRepository, WeeklyMenuRepository>();
-            services.AddDbContext<RecipeBookContext>(options => options.UseSqlite($"Data Source={GetDatabasePath()}"));
+            services.AddDbContext<RecipeBookContext>(options => {
+                options.UseSqlite($"Data Source={GetDatabasePath()}");
+                options.EnableSensitiveDataLogging();
+            });
 
             return services;
         }

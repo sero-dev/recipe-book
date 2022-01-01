@@ -9,8 +9,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(RecipeBookContext))]
-    [Migration("20220101182115_AddWeeklyMenuItemTable")]
-    partial class AddWeeklyMenuItemTable
+    [Migration("20220101211915_AddWeeklyMenuTable")]
+    partial class AddWeeklyMenuTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,7 +58,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("LunchRecipeId");
 
-                    b.ToTable("WeeklyMenuItem");
+                    b.ToTable("WeeklyMenu");
                 });
 
             modelBuilder.Entity("Domain.Entities.WeeklyMenuItem", b =>

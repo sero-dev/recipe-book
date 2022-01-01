@@ -56,7 +56,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("LunchRecipeId");
 
-                    b.ToTable("WeeklyMenuItem");
+                    b.ToTable("WeeklyMenu");
                 });
 
             modelBuilder.Entity("Domain.Entities.WeeklyMenuItem", b =>

@@ -14,7 +14,7 @@ namespace Persistence.Configurations
             builder.HasOne(b => b.DinnerRecipe)
                 .WithMany();
 
-            builder.ToTable("WeeklyMenuItem");
+            builder.ToTable("WeeklyMenu");
         }
     }
 }
