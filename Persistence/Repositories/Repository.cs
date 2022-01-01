@@ -96,7 +96,14 @@ namespace Persistence.Repositories
 
         public void UpdateRange(IEnumerable<T> items)
         {
-            throw new NotImplementedException();
+            Context.Set<T>().UpdateRange(items);
+            Context.SaveChanges();
+        }
+
+        public async Task UpdateRangeAsync(IEnumerable<T> items)
+        {
+            Context.Set<T>().UpdateRange(items);
+            await Context.SaveChangesAsync();
         }
     }
 }

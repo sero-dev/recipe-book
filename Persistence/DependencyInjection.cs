@@ -11,6 +11,7 @@ namespace Persistence
         public static IServiceCollection AddPersistence(this IServiceCollection services)
         {
             services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IWeeklyMenuRepository, WeeklyMenuRepository>();
             services.AddDbContext<RecipeBookContext>(options => options.UseSqlite($"Data Source={GetDatabasePath()}"));
 
             return services;

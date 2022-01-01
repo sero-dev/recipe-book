@@ -8,13 +8,13 @@ namespace Application.Recipes.Queries {
     public class GetRecipeByIdQuery : IRequest<RecipeDto> {
         public int Id {get; set;}
 
-        public class GetRecipeByIdHandler : IRequestHandler<GetRecipeByIdQuery, RecipeDto>
+        public class GetRecipeByIdQueryHandler : IRequestHandler<GetRecipeByIdQuery, RecipeDto>
         {
             private readonly IRecipeRepository _repository;
             private readonly IMapper _mapper;
 
 
-            public GetRecipeByIdHandler(IRecipeRepository repository, IMapper mapper) 
+            public GetRecipeByIdQueryHandler(IRecipeRepository repository, IMapper mapper) 
             {
                 _repository = repository;
                 _mapper = mapper;

@@ -7,6 +7,7 @@ namespace Persistence
     public class RecipeBookContext : DbContext
     {
         public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<WeeklyMenuItem> WeeklyMenuItems { get; set; }
 
         public RecipeBookContext(DbContextOptions options) : base(options)
         {
@@ -16,6 +17,7 @@ namespace Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(RecipeConfiguration).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(WeeklyMenuItemConfiguration).Assembly);
         }
     }
 }
