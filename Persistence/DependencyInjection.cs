@@ -14,7 +14,6 @@ namespace Persistence
             services.AddScoped<IWeeklyMenuRepository, WeeklyMenuRepository>();
             services.AddDbContext<RecipeBookContext>(options => {
                 options.UseNpgsql(GetDatabasePath());
-                options.EnableSensitiveDataLogging();
             });
 
             return services;
@@ -27,8 +26,6 @@ namespace Persistence
             var username = Environment.GetEnvironmentVariable("DATABASE_USER");
             var password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD");
             var dbPath = $"Host={host};Database={database};Username={username};Password={password}";
-
-            Console.WriteLine(dbPath);
 
             return dbPath;
         }
