@@ -13,7 +13,7 @@ namespace Persistence
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IWeeklyMenuRepository, WeeklyMenuRepository>();
             services.AddDbContext<RecipeBookContext>(options => {
-                options.UseSqlite($"Data Source={GetDatabasePath()}");
+                options.UseNpgsql(GetDatabasePath());
                 options.EnableSensitiveDataLogging();
             });
 
@@ -22,9 +22,13 @@ namespace Persistence
 
         private static string GetDatabasePath()
         {
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder);
-            var dbPath = $"{path}{System.IO.Path.DirectorySeparatorChar}recipebook.db";
+            var host = Environment.GetEnvironmentVariable("DATABASE_HOST");
+            var database = Environment.GetEnvironmentVariable("DATABASE_DB");
+            var username = Environment.GetEnvironmentVariable("DATABASE_USER");
+            var password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD");
+            var dbPath = $"Host={host};Database={database};Username={username};Password={password}";
+
+            Console.WriteLine(dbPath);
 
             return dbPath;
         }
