@@ -8,13 +8,13 @@ namespace Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<WeeklyMenuItem> builder)
         {
+            builder.ToTable("WeeklyMenu");
+
             builder.HasOne(b => b.LunchRecipe)
                 .WithMany();
 
             builder.HasOne(b => b.DinnerRecipe)
                 .WithMany();
-
-            builder.ToTable("WeeklyMenu");
         }
     }
 }
