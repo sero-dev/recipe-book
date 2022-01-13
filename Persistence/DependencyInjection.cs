@@ -13,6 +13,8 @@ namespace Persistence
         {
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IWeeklyMenuRepository, WeeklyMenuRepository>();
+            services.AddScoped<IIngredientRepository, IngredientRepository>();
+
             services.AddDbContext<RecipeBookContext>(options => {
                 options.UseNpgsql(GetDatabasePath());
                 options.LogTo(Console.WriteLine, LogLevel.Information);
