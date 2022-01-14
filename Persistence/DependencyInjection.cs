@@ -14,6 +14,7 @@ namespace Persistence
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IWeeklyMenuRepository, WeeklyMenuRepository>();
             services.AddScoped<IIngredientRepository, IngredientRepository>();
+            services.AddScoped<IRecipeIngredientRepository, RecipeIngredientRepository>();
 
             services.AddDbContext<RecipeBookContext>(options => {
                 options.UseNpgsql(GetDatabasePath());
@@ -28,7 +29,7 @@ namespace Persistence
             var host = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
             var database = Environment.GetEnvironmentVariable("DATABASE_DB") ?? "recipebook";
             var username = Environment.GetEnvironmentVariable("DATABASE_USER") ?? "serodev";
-            var password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD" ?? "apples123");
+            var password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "apples123";
             var dbPath = $"Host={host};Database={database};Username={username};Password={password}";
 
             return dbPath;

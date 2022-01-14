@@ -1,11 +1,13 @@
 ﻿using Domain.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    public interface IRecipeRepository : IRepository<Recipe> 
+    public interface IRecipeIngredientRepository : IRepository<RecipeIngredient>
     {
-        Task<Recipe> GetFullRecipe(int Id);
     }
 }

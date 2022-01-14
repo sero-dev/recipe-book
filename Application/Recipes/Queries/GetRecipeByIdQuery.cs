@@ -5,10 +5,10 @@ using AutoMapper;
 using MediatR;
 
 namespace Application.Recipes.Queries {
-    public class GetRecipeByIdQuery : IRequest<RecipeDto> {
+    public class GetRecipeByIdQuery : IRequest<RecipeDetailedResponse> {
         public int Id {get; set;}
 
-        public class GetRecipeByIdQueryHandler : IRequestHandler<GetRecipeByIdQuery, RecipeDto>
+        public class GetRecipeByIdQueryHandler : IRequestHandler<GetRecipeByIdQuery, RecipeDetailedResponse>
         {
             private readonly IRecipeRepository _repository;
             private readonly IMapper _mapper;
@@ -20,10 +20,10 @@ namespace Application.Recipes.Queries {
                 _mapper = mapper;
             }
 
-            public async Task<RecipeDto> Handle(GetRecipeByIdQuery request, CancellationToken cancellationToken)
+            public async Task<RecipeDetailedResponse> Handle(GetRecipeByIdQuery request, CancellationToken cancellationToken)
             {
-                var item = await _repository.GetAsync(request.Id);
-                var recipe = _mapper.Map<RecipeDto>(item);
+                var item = await _repository.GetFullRecipe(request.Id);
+                var recipe = _mapper.Map<RecipeDetailedResponse>(item);
                 return recipe;
             }
         }

@@ -6,10 +6,10 @@ using AutoMapper;
 using MediatR;
 
 namespace Application.Recipes.Queries {
-    public class SearchByRecipeNameQuery : IRequest<IEnumerable<RecipeDto>> {
+    public class SearchByRecipeNameQuery : IRequest<IEnumerable<RecipeResponse>> {
         public string Name { get; set; }
 
-        public class SearchByRecipeNameQueryHandler : IRequestHandler<SearchByRecipeNameQuery, IEnumerable<RecipeDto>>
+        public class SearchByRecipeNameQueryHandler : IRequestHandler<SearchByRecipeNameQuery, IEnumerable<RecipeResponse>>
         {
             private readonly IRecipeRepository _repository;
             private readonly IMapper _mapper;
@@ -20,10 +20,10 @@ namespace Application.Recipes.Queries {
                 _mapper = mapper;
             }
 
-            public async Task<IEnumerable<RecipeDto>> Handle(SearchByRecipeNameQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<RecipeResponse>> Handle(SearchByRecipeNameQuery request, CancellationToken cancellationToken)
             {
                 var item = await _repository.FindAsync(recipe => recipe.Name.ToLower().Contains(request.Name.ToLower()));
-                var recipes = _mapper.Map<IEnumerable<RecipeDto>>(item);
+                var recipes = _mapper.Map<IEnumerable<RecipeResponse>>(item);
 
                 return recipes;
             }

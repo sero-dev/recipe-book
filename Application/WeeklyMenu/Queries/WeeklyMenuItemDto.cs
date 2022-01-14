@@ -6,7 +6,7 @@ namespace Application.WeeklyMenu.Queries
     {
         public int Id { get; set; }
         public string Day { get; set; }
-        public RecipeDto Lunch { get; set; }
-        public RecipeDto Dinner { get; set; }
+        public RecipeResponse Lunch { get; set; }
+        public RecipeResponse Dinner { get; set; }
     }
 }

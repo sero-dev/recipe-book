@@ -9,7 +9,7 @@ namespace Application.Ingredients
     {
         public IngredientProfile()
         {
-            CreateMap<Ingredient, IngredientDto>().ReverseMap();
+            CreateMap<Ingredient, IngredientResponse>().ReverseMap();
             CreateMap<Ingredient, CreateIngredientCommand>().ReverseMap();
             CreateMap<Ingredient, UpdateIngredientCommand>().ReverseMap();
         }

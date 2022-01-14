@@ -7,9 +7,9 @@ using AutoMapper;
 using MediatR;
 
 namespace Application.Recipes.Queries {
-    public class GetAllRecipesQuery : IRequest<IEnumerable<RecipeDto>> {
+    public class GetAllRecipesQuery : IRequest<IEnumerable<RecipeResponse>> {
 
-        public class GetAllRecipesQueryHandler : IRequestHandler<GetAllRecipesQuery, IEnumerable<RecipeDto>>
+        public class GetAllRecipesQueryHandler : IRequestHandler<GetAllRecipesQuery, IEnumerable<RecipeResponse>>
         {
             private readonly IRecipeRepository _repository;
             private readonly IMapper _mapper;
@@ -20,10 +20,10 @@ namespace Application.Recipes.Queries {
                 _mapper = mapper;
             }
 
-            public async Task<IEnumerable<RecipeDto>> Handle(GetAllRecipesQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<RecipeResponse>> Handle(GetAllRecipesQuery request, CancellationToken cancellationToken)
             {
                 var items = await _repository.GetAllAsync();
-                var recipes = _mapper.Map<List<RecipeDto>>(items);
+                var recipes = _mapper.Map<List<RecipeResponse>>(items);
                 return recipes;
             }
         }

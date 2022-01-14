@@ -9,7 +9,9 @@ namespace Application.Recipes
     {
         public RecipeProfile()
         {
-            CreateMap<Recipe, RecipeDto>().ReverseMap();
+            CreateMap<Recipe, RecipeResponse>().ReverseMap();
+            CreateMap<RecipeIngredient, RecipeIngredientResponse>().ReverseMap();
+            CreateMap<Recipe, RecipeDetailedResponse>().ReverseMap();
             CreateMap<Recipe, CreateRecipeCommand>().ReverseMap();
             CreateMap<Recipe, UpdateRecipeCommand>().ReverseMap();
         }
