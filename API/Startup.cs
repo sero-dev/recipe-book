@@ -115,13 +115,13 @@ namespace API
 
                     if (context.WeeklyMenuItems.Count() == 0)
                     {
-                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Monday", Position = 1 });
-                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Tuesday", Position = 2 });
-                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Wednesday", Position = 3 });
-                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Thursday", Position = 4 });
-                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Friday", Position = 5 });
-                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Saturday", Position = 6 });
-                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Sunday", Position = 7 });
+                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Monday" });
+                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Tuesday" });
+                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Wednesday" });
+                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Thursday" });
+                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Friday" });
+                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Saturday" });
+                        context.WeeklyMenuItems.Add(new WeeklyMenuItem { Day = "Sunday" });
                     }
 
                     context.SaveChanges();

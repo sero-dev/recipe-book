@@ -4,6 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces;
 using AutoMapper;
+using System.Linq;
+using System;
 
 namespace Application.WeeklyMenu.Queries
 {
@@ -14,6 +16,7 @@ namespace Application.WeeklyMenu.Queries
 
             private readonly IWeeklyMenuRepository _repository;
             private readonly IMapper _mapper;
+            private static string[] Names = new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
             public GetWeeklyMenuQueryHandler(IWeeklyMenuRepository repository, IMapper mapper)
             {
@@ -25,9 +28,16 @@ namespace Application.WeeklyMenu.Queries
             {
                 var items = await _repository.GetFullWeekMenu();
                 var response = _mapper.Map<IEnumerable<WeeklyMenuItemDto>>(items);
+
+                response = response.Select(w => new { WeeklyMenu = w, Index = Array.IndexOf(Names, w.Day) })
+                   .OrderBy(w => w.Index)
+                   .Select(w => w.WeeklyMenu)
+                   .ToList();
+
                 return response;
             }
-           
+
+
         }
     }
 }

@@ -32,8 +32,8 @@ namespace Application.WeeklyMenu.Commands
 
             public async Task<Unit> Handle(UpdateWeeklyMenuCommand request, CancellationToken cancellationToken)
             {
-                var entity = _mapper.Map<IEnumerable<WeeklyMenuItem>>(request.Menu);
-                await _repository.UpdateRangeAsync(entity);
+                var entities = _mapper.Map<IEnumerable<WeeklyMenuItem>>(request.Menu);
+                await _repository.UpdateRangeAsync(entities);
 
                 return Unit.Value;
             }

@@ -20,7 +20,6 @@ namespace Persistence.Repositories
                 .AsNoTracking()
                 .Include(i => i.DinnerRecipe)
                 .Include(i => i.LunchRecipe)
-                .OrderBy(i => i.Position)
                 .ToListAsync();
 
             return items;

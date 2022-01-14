@@ -9,6 +9,5 @@
         public int? DinnerRecipeId { get; set; }
         public Recipe LunchRecipe { get; set; }
         public Recipe DinnerRecipe { get; set; }
-        public int Position { get; set; }
     }
 }
