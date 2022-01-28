@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Persistence.Repositories
@@ -23,6 +24,38 @@ namespace Persistence.Repositories
                 .FirstAsync(r => r.Id == Id);
 
             return item;
+        }
+
+        public async Task<IEnumerable<Recipe>> GetAllRecipes()
+        {
+            var recipes = await ((RecipeBookContext)Context).Recipes
+                .AsNoTracking()
+                .OrderBy(r => r.Name)
+                .ToListAsync();
+
+            return recipes;
+        }
+
+        public async Task UpdateRecipe(Recipe recipe)
+        {
+            List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
+            foreach (var ingredient in recipe.Ingredients)
+            {
+                ingredient.Recipe = recipe;
+                ingredient.RecipeId = recipe.Id;
+                recipeIngredients.Add(ingredient);
+            }
+
+            recipe.Ingredients = null;
+            Context.Update(recipe);
+
+            var fetchedEntries = await ((RecipeBookContext)Context).RecipesIngredients
+                .Where(r => r.RecipeId == recipe.Id && !recipeIngredients.Select(ri => ri.Id).Contains(r.Id))
+                .ToListAsync();
+
+            Context.RemoveRange(fetchedEntries);
+            Context.UpdateRange(recipeIngredients);
+            Context.SaveChanges();
         }
     }
 }
