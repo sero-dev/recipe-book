@@ -22,7 +22,7 @@ namespace Application.Recipes.Queries {
 
             public async Task<IEnumerable<RecipeResponse>> Handle(GetAllRecipesQuery request, CancellationToken cancellationToken)
             {
-                var items = await _repository.GetAllAsync();
+                var items = await _repository.GetAllRecipes();
                 var recipes = _mapper.Map<List<RecipeResponse>>(items);
                 return recipes;
             }
