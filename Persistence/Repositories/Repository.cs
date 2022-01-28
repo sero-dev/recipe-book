@@ -63,7 +63,7 @@ namespace Persistence.Repositories
         {
             var item = Get(id);
             Context.Set<T>().Remove(item);
-            Context.SaveChangesAsync();
+            Context.SaveChanges();
         }
 
         public async Task RemoveAsync(int id) {
