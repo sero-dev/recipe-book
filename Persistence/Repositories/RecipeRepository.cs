@@ -49,13 +49,13 @@ namespace Persistence.Repositories
             recipe.Ingredients = null;
             Context.Update(recipe);
 
-            var fetchedEntries = await ((RecipeBookContext)Context).RecipesIngredients
+            var ingredientsToDelete = await ((RecipeBookContext)Context).RecipeIngredients
                 .Where(r => r.RecipeId == recipe.Id && !recipeIngredients.Select(ri => ri.Id).Contains(r.Id))
                 .ToListAsync();
 
-            Context.RemoveRange(fetchedEntries);
+            Context.RemoveRange(ingredientsToDelete);
             Context.UpdateRange(recipeIngredients);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
     }
 }
