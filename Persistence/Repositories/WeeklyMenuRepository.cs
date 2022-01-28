@@ -24,5 +24,20 @@ namespace Persistence.Repositories
 
             return items;
         }
+
+        public async Task<IEnumerable<WeeklyMenuItem>> GetShoppingList()
+        {
+            var items = await ((RecipeBookContext)Context).WeeklyMenuItems
+                .AsNoTracking()
+                .Include(i => i.DinnerRecipe)
+                    .ThenInclude(dr => dr.Ingredients)
+                        .ThenInclude(i => i.Ingredient)
+                .Include(i => i.LunchRecipe)
+                    .ThenInclude(lr => lr.Ingredients)
+                        .ThenInclude(i => i.Ingredient)
+                .ToListAsync();
+
+            return items;
+        }
     }
 }
