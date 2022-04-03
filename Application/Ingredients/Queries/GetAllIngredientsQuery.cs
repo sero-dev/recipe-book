@@ -21,7 +21,7 @@ namespace Application.Ingredients.Queries {
 
             public async Task<IEnumerable<IngredientResponse>> Handle(GetAllIngredientsQuery request, CancellationToken cancellationToken)
             {
-                var items = await _repository.GetAllAsync();
+                var items = await _repository.GetAllIngredients();
                 var ingredients = _mapper.Map<List<IngredientResponse>>(items);
                 return ingredients;
             }
