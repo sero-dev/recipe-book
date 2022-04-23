@@ -26,7 +26,6 @@ namespace API
             services.AddApplication();
             services.AddPersistence();
             services.AddControllers();
-            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,8 +38,6 @@ namespace API
 
             UpdateDatabase(app);
             SeedDatabase(app);
-
-            app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseHttpsRedirection();
 
