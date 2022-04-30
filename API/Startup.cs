@@ -47,7 +47,8 @@ namespace API
             app.UseCors(policy => policy
                 .AllowAnyHeader()
                 .AllowAnyMethod()
-                .AllowAnyOrigin()
+                .AllowCredentials()
+                .WithOrigins("http://localhost:4200", "https://serodev.com")
             );
 
             app.UseAuthorization();
